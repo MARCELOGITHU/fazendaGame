@@ -140,6 +140,7 @@ public class Fazenda {
         //CODIGO QUE RETORNA O VALOR DE PRODUCAODELEITEPORDIA DAS VACAS DA LISTA PARA 8
         for (int i = 0; i < this.listaDeVacas.toArray().length; i++) {
             this.listaDeVacas.get(i).setProducaoDeLeitePorDia(8);
+            this.listaDeVacasQueDaoLeite.add(listaDeVacas.get(i));
         }
         System.out.println("Seu caixa é : " + this.caixa + " reais, a quantidade de leite é: "
                 + this.quantidadeDeLeitePorLitro + " litros");

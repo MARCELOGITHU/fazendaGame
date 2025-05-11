@@ -59,18 +59,18 @@ public class Jogo {
         System.out.println("Agora é com você, escolha uma opção para continuar: ");
         //COMECO PARA LOOPING DE JOGO
         Scanner scanner = new Scanner(System.in);
-        int opcao;
+        int opcaoGeral;
         String nomeEmpregado;
         do {
             MenuPrincipal.exibirMenuPrincipal();
-            opcao = leitura.nextInt();
+            opcaoGeral = leitura.nextInt();
 
-            switch (opcao) {
+            switch (opcaoGeral) {
                 case 1://exibe menu fazenda
                     MenuPrincipal.exibirMenuFazenda();
-                    opcao = leitura.nextInt();
+                    opcaoGeral = leitura.nextInt();
                     Scanner leituraOpcaoMenuFazenda = new Scanner(System.in);
-                    switch (opcao) {
+                    switch (opcaoGeral) {
                         case 1://opção contratar empregado
                             System.out.println("Digite o nome do empregado");
                             nomeEmpregado = leituraOpcaoMenuFazenda.nextLine();
@@ -113,9 +113,9 @@ public class Jogo {
                     break;
                 case 2://exibe menu pasto
                     MenuPrincipal.exibirMenuPasto();
-                    opcao = leitura.nextInt();
+                    opcaoGeral = leitura.nextInt();
                     Scanner leituraOpcaoMenuPasto = new Scanner(System.in);
-                    switch (opcao) {
+                    switch (opcaoGeral) {
                         case 1://opção produzir leite
                             int quantasVacasOrdenhar = 0;
                             while (quantasVacasOrdenhar != fazenda.listaDeVacasQueDaoLeite.toArray().length) {
@@ -142,7 +142,7 @@ public class Jogo {
                 case 3://exibe menu loja
             }
 
-        } while (opcao != 9);
+        } while (opcaoGeral != 9);
 
         scanner.close();
     }
