@@ -16,9 +16,6 @@ public class TesteJogo {
         Vaca vaca1 = new Vaca();
         Vaca vaca2 = new Vaca();
         Vaca vaca3 = new Vaca();
-        Derivado derivado1 = new Derivado("queijo",2,10,3);
-        Derivado derivado2 = new Derivado("requeijao", 5,25,10);
-        Derivado derivado3 = new Derivado("manteiga", 15,38,15);
 
         fazenda.contrataEmpregado(empregado1);
         fazenda.contrataEmpregado(empregado2);

@@ -22,15 +22,15 @@ public class Loja extends Fazenda {
         this.caixa = caixa;
     }
 
-    public void venderDerivados(Fazenda fazenda) {
-        double refValorDeDerivados = 0;
-        for (int i = 0; i < fazenda.getListaDeDerivados().toArray().length; i++) {
-            refValorDeDerivados += fazenda.getListaDeDerivados().get(i).getLucroDeVenda();
-        }
-        fazenda.getListaDeDerivados().clear();
-        fazenda.adicionarAoCaixa(refValorDeDerivados);
-        System.out.println(refValorDeDerivados + " Reais de derivados vendidos, seu caixa tem: " + fazenda.getCaixa());
-    }
+//    public void venderDerivados(Fazenda fazenda) {
+//        double refValorDeDerivados = 0;
+//        for (int i = 0; i < fazenda.getListaDeDerivados().toArray().length; i++) {
+//            refValorDeDerivados += fazenda.getListaDeDerivados().get(i).getLucroDeVenda();
+//        }
+//        fazenda.getListaDeDerivados().clear();
+//        fazenda.adicionarAoCaixa(refValorDeDerivados);
+//        System.out.println(refValorDeDerivados + " Reais de derivados vendidos, seu caixa tem: " + fazenda.getCaixa());
+//    }
 
     public static double getValorPorCadaEspacoNoEstoque() {
         return valorPorCadaEspacoNoEstoque;

@@ -29,19 +29,15 @@ public class Empregado extends Fazenda{
         return salarioPorMes;
     }
 
-    public void produzir(Derivado derivado,Fazenda fazenda) {
-        if (derivado.getCustoParaFazer() <= fazenda.getCaixa() & derivado.getLitrosDeLeiteParaProduzir() <= fazenda.getQuantidadeDeLeitePorLitro()) {
-            fazenda.adicionarAoCaixa(derivado.getCustoParaFazer());
-            fazenda.retirarLeite(derivado.getLitrosDeLeiteParaProduzir());
-            fazenda.getListaDeDerivados().add(derivado);
-            System.out.println("Você gastou: " + derivado.getCustoParaFazer() + " reais para produzir: " + derivado.getNomeDoDerivado() + ", seu caixa tem: " + fazenda.getCaixa()
-                    + " e seu estoque de leite tem: " + fazenda.getQuantidadeDeLeitePorLitro() + " litros");
-        } else {
-            System.out.println("Dinheiro ou quantidade de leite não é suficiente para produzir\n"
-                    + " dinheiro: " + fazenda.getCaixa() + " leite: " + fazenda.getQuantidadeDeLeitePorLitro());
-        }
-        //CRIAR METODO QUE ADICIONA O DERIVADO A UMA LISTA NA LOJA OU FAZENDA(NAO SEI), DEPOIS ADICIONAR AO ESTOQUE DA LOJA
-        //
+    public void produzirDerivado(int i,Fazenda fazenda) {
+        Derivado derivado = fazenda.getListaDeDerivadosParaProducao().get(i);
+        fazenda.getListaDeDerivados().add(derivado);
+        fazenda.retirarLeite(derivado.getLitrosDeLeiteParaProduzir());
+        fazenda.retirarDoCaixa(derivado.getCustoParaFazer());
+        System.out.println(derivado.getNomeDoDerivado() + " produzido! Sua lista de derivados é:\n" + fazenda.getListaDeDerivados()  );
+
+//        CRIAR METODO QUE ADICIONA O DERIVADO A UMA LISTA NA LOJA OU FAZENDA(NAO SEI), DEPOIS ADICIONAR AO ESTOQUE DA LOJA
+
     }
     @Override
     public String toString() {

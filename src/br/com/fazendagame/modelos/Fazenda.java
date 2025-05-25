@@ -2,7 +2,7 @@ package br.com.fazendagame.modelos;
 
 import br.com.fazendagame.modelos.produtoDerivadosDoLeite.Derivado;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Fazenda {
     private String nomeFazenda;
@@ -18,8 +18,16 @@ public class Fazenda {
     private ArrayList<Loja> listaDeLoja = new ArrayList<>();
     private ArrayList<Pasto> listaDePasto = new ArrayList<>();
     private ArrayList<Derivado> listaDeDerivados = new ArrayList<>();
+    private List<Derivado> listaDeDerivadosParaProducao = List.of(
+            new Derivado("leitecondensado", 50, 73, 40),
+            new Derivado("cremedeleite", 38, 65, 32),
+            new Derivado("manteiga", 25, 50, 20),
+            new Derivado("requeijão", 15, 38, 15),
+            new Derivado("queijo", 5, 25, 10),
+            new Derivado("qualhada", 2, 10, 3));
     protected ArrayList<Vaca> listaDeVacas = new ArrayList<>();
     public ArrayList<Vaca> listaDeVacasQueDaoLeite = new ArrayList<>();
+    public ArrayList<Vaca> listaDeVacasQueNaoDaoLeite = new ArrayList<>();
 
 
     public Fazenda(String nomeDaFazenda) {
@@ -27,15 +35,19 @@ public class Fazenda {
         System.out.println("Dia " + this.dia + " fazenda " + this.nomeFazenda + " criada, você tem " + this.caixa
                 + " reais para investir na sua fazenda");
     }
+
     public Fazenda() {
 
     }
+
     public double getQuantidadeDeLeitePorLitro() {
         return quantidadeDeLeitePorLitro;
     }
+
     public ArrayList<Empregado> getListaDeEmpregados() {
         return listaDeEmpregados;
     }
+
     public double getCaixa() {
         return caixa;
     }
@@ -43,18 +55,17 @@ public class Fazenda {
     public void adicionarAoCaixa(double valor) {
         this.caixa += valor;
     }
-    public void retirarDoCaixa(double valor){
+
+    public void retirarDoCaixa(double valor) {
         this.caixa -= valor;
     }
+
     public void adicionarLeite(double valor) {
         this.quantidadeDeLeitePorLitro += valor;
     }
-    public void retirarLeite(double valor){
-        this.quantidadeDeLeitePorLitro -= valor;
-    }
 
-    public ArrayList<Derivado> getListaDeDerivados() {
-        return listaDeDerivados;
+    public void retirarLeite(double valor) {
+        this.quantidadeDeLeitePorLitro -= valor;
     }
 
 
@@ -66,14 +77,52 @@ public class Fazenda {
         return listaDePasto;
     }
 
+    public List<Derivado> getListaDeDerivados() {
+        return listaDeDerivados;
+    }
+
+    public List<Derivado> getListaDeDerivadosParaProducao() {
+        return listaDeDerivadosParaProducao;
+    }
+
+    public void getListaDeDerivadosPossiveisDeProduzir() {
+            int i = 0;
+            for (Derivado derivado : listaDeDerivadosParaProducao) {
+                if (this.caixa >= derivado.getCustoParaFazer() & this.quantidadeDeLeitePorLitro >= derivado.getLitrosDeLeiteParaProduzir()) {
+                    System.out.println(i + "." + derivado + " / " + derivado.getLitrosDeLeiteParaProduzir() + "L / " + derivado.getLucroDeVenda() + "R$ / " + derivado.getCustoParaFazer() + "R$");
+                }
+                i++;
+            }
+    }
+
+    public boolean verificaListaDeDerivadosPossiveis() {
+        List<Derivado> lista = new ArrayList<>();
+        for (Derivado derivado : listaDeDerivadosParaProducao) {
+            if (this.caixa >= derivado.getCustoParaFazer() & this.quantidadeDeLeitePorLitro >= derivado.getLitrosDeLeiteParaProduzir()) {
+                lista.add(derivado);
+            }
+        }
+        return !lista.isEmpty();
+    }
+
+
     public ArrayList<Vaca> getListaDeVacas() {
         return listaDeVacas;
     }
+
     public int getVacaIdentificacao() {
         return vacaIdentificacao;
     }
+
     public int getPastoIdentificacao() {
         return pastoIdentificacao;
+    }
+
+    public Empregado maoDeObra() {
+        Random random = new Random();
+        Empregado empregadoSelecionado = listaDeEmpregados.get(random.nextInt(listaDeEmpregados.size()));
+
+        return empregadoSelecionado;
     }
 
     public void contrataEmpregado(Empregado empregado) {
@@ -81,26 +130,28 @@ public class Fazenda {
         System.out.println("Empregado " + empregado.getNome() + " contratado");
     }
 
-    public void comprarPasto(Pasto pasto,double tamanhoPorMetroQuadrado) {
+    public void comprarPasto(Pasto pasto, double tamanhoPorMetroQuadrado) {
         this.listaDePasto.add(pasto);
         pasto.identificacaoPasto = this.pastoIdentificacao;
-        this.pastoIdentificacao ++;
+        this.pastoIdentificacao++;
         pasto.tamanho = tamanhoPorMetroQuadrado;
         double refCustoDoPasto = tamanhoPorMetroQuadrado * pasto.valorDeTamanhoPorMetroQuadrado;
         this.retirarDoCaixa(refCustoDoPasto);
-        System.out.println("Pasto de " + refCustoDoPasto + " reais, com " + pasto.tamanho +  " m² comprado, você tem " + this.caixa);
+        System.out.println("Pasto de " + refCustoDoPasto + " reais, com " + pasto.tamanho + " m² comprado, você tem " + this.caixa);
     }
+
     public void comprarLoja(Loja loja, int tamanhoDoEstoque) {
         this.listaDeLoja.add(loja);
         loja.identificacaoLoja = this.lojaIdentificacao;
-        this.lojaIdentificacao ++;
+        this.lojaIdentificacao++;
         loja.tamanhoDoEstoque = tamanhoDoEstoque;
         double refCustoDaLoja = tamanhoDoEstoque * loja.valorPorCadaEspacoNoEstoque;
         this.retirarDoCaixa(refCustoDaLoja);
         loja.caixa = this.caixa;
-        System.out.println("loja de " + refCustoDaLoja + " reais, com " + loja.tamanhoDoEstoque +  " espaços de estoque comprada, você tem " + this.caixa);
+        System.out.println("loja de " + refCustoDaLoja + " reais, com " + loja.tamanhoDoEstoque + " espaços de estoque comprada, você tem " + this.caixa);
     }
-    public void comprarVaca(Vaca vaca,Pasto pasto) {
+
+    public void comprarVaca(Vaca vaca, Pasto pasto) {
         if (vaca.getEspacoNecessarioPorMetroQuadrado() <= pasto.tamanho) {
             //adiciona a vaca na listaDeVacas
             this.listaDeVacas.add(vaca);
@@ -118,13 +169,13 @@ public class Fazenda {
     }
 
     public void proximoDia() {
-        this.dia ++;
+        this.dia++;
         this.contagemDeMes++;
         System.out.println("Bom dia, hoje é seu: " + this.dia + "º dia ");
 
         //CODIGO QUE FAZ O PAGAMENTO DOS EMPREGADOS A CADA 30 DIAS DE ACORDO COM A CONTAGEMDEMES
         double valorTotalParaPagamentoDosEmpregados = 0;
-        if (this.contagemDeMes == 30 ) {
+        if (this.contagemDeMes == 30) {
             for (int i = 0; i < this.listaDeEmpregados.toArray().length; i++) {
                 valorTotalParaPagamentoDosEmpregados += this.listaDeEmpregados.get(i).getSalarioPorMes();
                 System.out.println("empregado " + this.listaDeEmpregados.get(i).getNome() + " recebeu o salario");
@@ -139,10 +190,15 @@ public class Fazenda {
         }
         //CODIGO QUE RETORNA O VALOR DE PRODUCAODELEITEPORDIA DAS VACAS DA LISTA PARA 8
         for (int i = 0; i < this.listaDeVacas.toArray().length; i++) {
-            this.listaDeVacas.get(i).setProducaoDeLeitePorDia(8);
-            this.listaDeVacasQueDaoLeite.add(listaDeVacas.get(i));
+            if (this.listaDeVacas.get(i).getProducaoDeLeitePorDia() == 0) {
+                this.listaDeVacasQueDaoLeite.add(listaDeVacas.get(i));
+                this.listaDeVacas.get(i).setProducaoDeLeitePorDia(8);
+            }
         }
-        System.out.println("Seu caixa é : " + this.caixa + " reais, a quantidade de leite é: "
-                + this.quantidadeDeLeitePorLitro + " litros");
-    }
+
+        System.out.println("Seu caixa é : " + this.caixa +
+                "\nA quantidade de leite é: " + this.quantidadeDeLeitePorLitro + " litros");
+    }// ADICIONAR MAIS INFORMAÇÕES NO COMEÇO DO DIA
+
+
 }

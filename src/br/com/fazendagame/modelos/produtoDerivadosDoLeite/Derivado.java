@@ -1,33 +1,37 @@
 package br.com.fazendagame.modelos.produtoDerivadosDoLeite;
 
-import br.com.fazendagame.modelos.Loja;
 
-public class Derivado extends Loja {
-    private int litrosDeLeiteParaProduzir;
-    private String nomeDoDerivado;
-    private double lucroDeVenda;
-    private double custoParaFazer;
-    public Derivado(String produto, int litrosDeLeiteParaProduzir, double lucroDeVenda, double custoParaFazer) {
-        this.nomeDoDerivado = produto;
+import java.util.List;
+
+public class Derivado {
+    private final int litrosDeLeiteParaProduzir;
+    private final String nomeDoDerivado;
+    private final double lucroDeVenda;
+    private final double custoParaFazer;
+
+    public Derivado(String nomeDoDerivado,int litrosDeLeiteParaProduzir, double lucroDeVenda, double custoParaFazer) {
         this.litrosDeLeiteParaProduzir = litrosDeLeiteParaProduzir;
+        this.nomeDoDerivado = nomeDoDerivado;
         this.lucroDeVenda = lucroDeVenda;
         this.custoParaFazer = custoParaFazer;
+
+
     }
 
     public int getLitrosDeLeiteParaProduzir() {
-        return litrosDeLeiteParaProduzir;
+        return this.litrosDeLeiteParaProduzir;
     }
 
     public String getNomeDoDerivado() {
-        return nomeDoDerivado;
+        return this.nomeDoDerivado;
     }
 
     public double getLucroDeVenda() {
-        return lucroDeVenda;
+        return this.lucroDeVenda;
     }
 
     public double getCustoParaFazer() {
-        return custoParaFazer;
+        return this.custoParaFazer;
     }
     @Override
     public String toString() {
@@ -36,11 +40,12 @@ public class Derivado extends Loja {
 
     /**
      * DERIVADO / litrosDeLeiteParaProduzir / lucroDeVenda / custoParaFazer
-     * leitecondensado
-     * cremedeleite
-     * manteiga 15 38 15
-     * requeijao 5 25 10
-     * queijo 2 10 3
+     * leitecondensado 50 73 40
+     * cremedeleite 38 65 32
+     * manteiga 25 50 20
+     * requeijao 15 38 15
+     * queijo 5 25 10
+     * qualhada 2 10 3
      */
 }
 
