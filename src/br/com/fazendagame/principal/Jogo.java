@@ -6,6 +6,8 @@ import br.com.fazendagame.principal.menus.MenuFazenda;
 import br.com.fazendagame.principal.menus.MenuPrincipal;
 
 import java.io.BufferedReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Jogo {
@@ -100,9 +102,10 @@ public class Jogo {
                             }
                         }
                         case 4 -> {//opção resumo de bens
-                            fazenda.resumoBens(loja);
+                            fazenda.resumoBens(loja,pasto);
                         }
-                        case 5 ->{}
+                        case 5 -> {
+                        }
                     }
                 }
                 case 2 -> {//exibe menu pasto
@@ -112,22 +115,17 @@ public class Jogo {
                     switch (opcaoGeral) {
                         case 1 -> {//opção produzir leite
                             int quantasVacasOrdenhar = 0;
-                            while (quantasVacasOrdenhar != fazenda.listaDeVacasQueDaoLeite.toArray().length) {
-                                System.out.println("De quantas vacas você quer ordenhar? você tem: " + fazenda.getListaDeVacas().toArray().length + " no total mas " + fazenda.listaDeVacasQueDaoLeite.toArray().length + " vacas dão leite");
-                                quantasVacasOrdenhar = leitura.nextInt();
-                                if (quantasVacasOrdenhar == 0){
-                                    break;
-                                }else if (quantasVacasOrdenhar <= fazenda.listaDeVacasQueDaoLeite.toArray().length) {
-                                    for (int i = 0; i < quantasVacasOrdenhar; i++) {
-                                        int ref = 0;
-                                        if (fazenda.listaDeVacasQueDaoLeite.get(ref).getProducaoDeLeitePorDia() == 8) {
-                                            fazenda.maoDeObra().ordenhar(fazenda.listaDeVacasQueDaoLeite.get(ref), fazenda);
-                                        }
+                            System.out.println("De quantas vacas você quer ordenhar? você tem: " + fazenda.getListaDeVacas().toArray().length + " no total mas " + fazenda.listaDeVacasQueDaoLeite.toArray().length + " vacas dão leite");
+                            quantasVacasOrdenhar = leitura.nextInt();
+                            if (quantasVacasOrdenhar != 0 & quantasVacasOrdenhar <= fazenda.listaDeVacasQueDaoLeite.toArray().length ) {
+                                for (int i = 0; i < quantasVacasOrdenhar; i++) {
+                                    int ref = 0;
+                                    if (fazenda.listaDeVacasQueDaoLeite.get(ref).getProducaoDeLeitePorDia() == 8) {
+                                        fazenda.maoDeObra().ordenhar(fazenda.listaDeVacasQueDaoLeite.get(ref), fazenda);
                                     }
-                                }else {
-                                    System.out.println("Você não tem tantas vacas que possam ser ordenhadas");
-                                    quantasVacasOrdenhar = fazenda.listaDeVacasQueDaoLeite.toArray().length;
                                 }
+                            } else {
+                                System.out.println("Você não tem tantas vacas que possam ser ordenhadas");
                             }
                         }
                         case 2 -> {//opção produzir derivados
@@ -137,18 +135,24 @@ public class Jogo {
                                 fazenda.getListaDeDerivadosPossiveisDeProduzir();
                                 int selecionarDerivado = 0;
                                 selecionarDerivado = leitura.nextInt();
-                                fazenda.maoDeObra().produzirDerivado(selecionarDerivado, fazenda, loja);
+                                if (selecionarDerivado <= fazenda.getQuantidadeDeDerivadospossiveis()) {
+                                    fazenda.maoDeObra().produzirDerivado(selecionarDerivado, fazenda, loja);
+                                } else {
+                                    System.out.println("Opção invalida");
+                                }
                             } else {
                                 fazenda.getListaDeDerivadosPossiveisDeProduzir();
                                 System.out.println("Não é possivel produzir");
                                 System.out.println("Seu saldo é de :" + fazenda.getCaixa() + "R$, e " + fazenda.getQuantidadeDeLeitePorLitro() + "L");
                             }
+
                         }
                         case 3 -> {
                             fazenda.proximoDia();
                         }
 
-                        case 4 ->{}
+                        case 4 -> {
+                        }
                     }
                 }
                 case 3 -> {//exibe menu loja
@@ -157,31 +161,25 @@ public class Jogo {
                     Scanner leituraOpcaoMenuPasto = new Scanner(System.in);
                     switch (opcaoGeral) {
                         case 1 -> {//Vender derivados
-                            if (!loja.getListaDeDerivados().isEmpty()){
+                            if (!loja.getListaDeDerivados().isEmpty()) {
                                 loja.venderDerivado(fazenda);
-                            }else {
+                            } else {
                                 System.out.println("Sua lista de derivados esta vazia");
                             }
                         }
                         case 2 -> {//ver lista de derivados
                             loja.listaDeDerivadosResumido();
                         }
-                        case 3 ->{}
+                        case 3 -> {
+                        }
                     }
                 }
-
                 case 4 -> {//proximo dia
                     fazenda.proximoDia();
-
                 }
             }
-
         } while (opcaoGeral != 9);
 
         scanner.close();
     }
-
-
-    //CRIAR PERGUNTAR SOBRE O QUE O USUARIO QUER FAZER
-    //SE ELE QUER ORDENHAR, IR PARA O PROXIMO DIA, CONTRATAR MAIS EMPREGADOS, COMPRAR VACAS OU PASTO, BASEADO NO CAIXA
 }

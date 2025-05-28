@@ -14,17 +14,18 @@ public class Fazenda {
     protected int pastoIdentificacao = 1;
 
     protected int lojaIdentificacao = 1;
+    protected int quantidadeDeDerivadospossiveis;
     private ArrayList<Empregado> listaDeEmpregados = new ArrayList<>();
     private ArrayList<Loja> listaDeLoja = new ArrayList<>();
     private ArrayList<Pasto> listaDePasto = new ArrayList<>();
 
     private List<Derivado> listaDeDerivadosParaProducao = List.of(
-            new Derivado("leitecondensado", 50, 73, 40),
-            new Derivado("cremedeleite", 38, 65, 32),
-            new Derivado("manteiga", 25, 50, 20),
-            new Derivado("requeijão", 15, 38, 15),
+            new Derivado("qualhada", 2, 10, 3),
             new Derivado("queijo", 5, 25, 10),
-            new Derivado("qualhada", 2, 10, 3));
+            new Derivado("requeijão", 15, 38, 15),
+            new Derivado("manteiga", 25, 50, 20),
+            new Derivado("cremedeleite", 38, 65, 32),
+            new Derivado("leitecondensado", 50, 73, 40));
     protected ArrayList<Vaca> listaDeVacas = new ArrayList<>();
     public ArrayList<Vaca> listaDeVacasQueDaoLeite = new ArrayList<>();
 
@@ -82,12 +83,15 @@ public class Fazenda {
 
     public void getListaDeDerivadosPossiveisDeProduzir() {
         int i = 0;
+        int qDerivados = 0;
         for (Derivado derivado : listaDeDerivadosParaProducao) {
             if (this.caixa >= derivado.getCustoParaFazer() & this.quantidadeDeLeitePorLitro >= derivado.getLitrosDeLeiteParaProduzir()) {
-                System.out.println(i + "." + derivado + " / " + derivado.getLitrosDeLeiteParaProduzir() + "L / " + derivado.getLucroDeVenda() + "R$ / " + derivado.getCustoParaFazer() + "R$");
+                System.out.println(i + "." + derivado + " / " + derivado.getLitrosDeLeiteParaProduzir() + "L / " + derivado.getLucroDeVenda() + " R$ / " + derivado.getCustoParaFazer() + "R$");
+                qDerivados++;
             }
             i++;
         }
+        this.quantidadeDeDerivadospossiveis = qDerivados-1;
     }
 
     public boolean verificaListaDeDerivadosPossiveis() {
@@ -107,6 +111,10 @@ public class Fazenda {
 
     public int getVacaIdentificacao() {
         return vacaIdentificacao;
+    }
+
+    public int getQuantidadeDeDerivadospossiveis() {
+        return quantidadeDeDerivadospossiveis;
     }
 
     public int getPastoIdentificacao() {
@@ -160,12 +168,13 @@ public class Fazenda {
         }
     }
 
-    public void resumoBens(Loja loja) {
+    public void resumoBens(Loja loja,Pasto pasto) {
         System.out.println(this.caixa + " reais\n" +
                 this.listaDeVacas.size() + " vacas\n" +
                 this.listaDeEmpregados.size() + " empregados\n" +
                 this.quantidadeDeLeitePorLitro + " litros de leite\n" +
-                "sua lista de derivados: " + loja.getListaDeDerivados());
+                "sua lista de derivados: " + loja.getListaDeDerivados() +
+                "\n" + pasto.tamanho + "m² de pasto");
 
     }
 

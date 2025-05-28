@@ -36,8 +36,8 @@ public class Empregado extends Fazenda{
         fazenda.retirarDoCaixa(derivado.getCustoParaFazer());
         System.out.println(derivado.getNomeDoDerivado() + " produzido! Sua lista de derivados é:\n" + loja.getListaDeDerivados()  );
         System.out.println("Seu caixa :" + fazenda.getCaixa() + "R$");
+        System.out.println("A quantidade de litros é : " + fazenda.getQuantidadeDeLeitePorLitro() + "L");
 
-//        CRIAR METODO QUE ADICIONA O DERIVADO A UMA LISTA NA LOJA OU FAZENDA(NAO SEI), DEPOIS ADICIONAR AO ESTOQUE DA LOJA
 
     }
 

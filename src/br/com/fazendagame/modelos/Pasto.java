@@ -23,7 +23,7 @@ public class Pasto extends Fazenda {
     }
 
     public void aumentarTamanho(double tamanhoEmMetrosQuadrados,Fazenda fazenda) {
-        if (valorDeTamanhoPorMetroQuadrado <= fazenda.getCaixa()) {
+        if (valorDeTamanhoPorMetroQuadrado*tamanhoEmMetrosQuadrados <= fazenda.getCaixa()) {
             this.tamanho += tamanhoEmMetrosQuadrados;
             fazenda.pastoIdentificacao ++;
             double refCustoDoPasto = tamanhoEmMetrosQuadrados*valorDeTamanhoPorMetroQuadrado;

@@ -4,16 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a190164-3d8b-4f74-b742-86ede876b67a" name="Changes" comment="bugs resolvidos&#10;bug produzir leite&#10;bug produzir derivados&#10;bug proximo dia">
+    <list default="true" id="3a190164-3d8b-4f74-b742-86ede876b67a" name="Changes" comment="ao comprar vaca mostrar quantidade em numeros de vacas na lista&#10;adicionar opção de resumo da fazenda, mostrando bens&#10;adicionar opção de voltar para tela principal&#10;ao mostra lista com derivados, mostra apenas os nomes de cada e a quantidade">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Empregado.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Empregado.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Fazenda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Fazenda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Loja.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Loja.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Pasto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/modelos/Pasto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/principal/Jogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/principal/Jogo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/principal/menus/MenuPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/principal/menus/MenuPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/teste/TesteJogo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/teste/TesteJogo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/br/com/fazendagame/teste/TesteProduzirDerivados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/com/fazendagame/teste/TesteProduzirDerivados.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +118,7 @@
       <workItem from="1746959968638" duration="1866000" />
       <workItem from="1747408443237" duration="15601000" />
       <workItem from="1747503916661" duration="28680000" />
-      <workItem from="1748208911945" duration="8011000" />
+      <workItem from="1748208911945" duration="15083000" />
     </task>
     <task id="LOCAL-00001" summary="bug produzir leite resolvido">
       <option name="closed" value="true" />
@@ -147,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748139536204</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ao comprar vaca mostrar quantidade em numeros de vacas na lista&#10;adicionar opção de resumo da fazenda, mostrando bens&#10;adicionar opção de voltar para tela principal&#10;ao mostra lista com derivados, mostra apenas os nomes de cada e a quantidade">
+      <option name="closed" value="true" />
+      <created>1748462973522</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1748462973522</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,7 +161,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="bug produzir leite resolvido" />
     <MESSAGE value="bugs resolvidos&#10;bug produzir leite&#10;bug produzir derivados&#10;bug proximo dia" />
-    <option name="LAST_COMMIT_MESSAGE" value="bugs resolvidos&#10;bug produzir leite&#10;bug produzir derivados&#10;bug proximo dia" />
+    <MESSAGE value="ao comprar vaca mostrar quantidade em numeros de vacas na lista&#10;adicionar opção de resumo da fazenda, mostrando bens&#10;adicionar opção de voltar para tela principal&#10;ao mostra lista com derivados, mostra apenas os nomes de cada e a quantidade" />
+    <option name="LAST_COMMIT_MESSAGE" value="ao comprar vaca mostrar quantidade em numeros de vacas na lista&#10;adicionar opção de resumo da fazenda, mostrando bens&#10;adicionar opção de voltar para tela principal&#10;ao mostra lista com derivados, mostra apenas os nomes de cada e a quantidade" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

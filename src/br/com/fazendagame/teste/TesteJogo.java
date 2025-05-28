@@ -33,6 +33,8 @@ public class TesteJogo {
 
         loja.listaDeDerivadosResumido();
 
+        empregado2.produzirDerivado(1,fazenda,loja);
+
 
     }
 }
