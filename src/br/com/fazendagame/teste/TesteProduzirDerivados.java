@@ -25,15 +25,15 @@ public class TesteProduzirDerivados {
 //        empregado1.ordenhar(vaca2,fazenda);
         fazenda.getListaDeDerivadosPossiveisDeProduzir();
 
-        empregado1.produzirDerivado(1,fazenda);
+        empregado1.produzirDerivado(1,fazenda,loja);
 //        fazenda.proximoDia();
 //        empregado1.ordenhar(vaca1,fazenda);
 //        empregado1.ordenhar(vaca2,fazenda);
         fazenda.getListaDeDerivadosPossiveisDeProduzir();
 
-        empregado1.produzirDerivado(2,fazenda);
+        empregado1.produzirDerivado(2,fazenda,loja);
         fazenda.getListaDeDerivadosPossiveisDeProduzir();
 
-        System.out.println(fazenda.getListaDeDerivados().isEmpty());
+        System.out.println(loja.getListaDeDerivados().isEmpty());
     }
 }

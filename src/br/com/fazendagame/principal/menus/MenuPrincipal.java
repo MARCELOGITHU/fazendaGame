@@ -14,7 +14,7 @@ public class MenuPrincipal {
     public static void exibirMenuFazenda() {
         System.out.println("""
                                 ***MENU FAZENDA***
-                    1.Contratar empregado 2.Aumentar tamanho do pasto 3.Comprar loja 4.Comprar vaca
+                    1.Contratar empregado 2.Aumentar tamanho do pasto 3.Comprar vaca 4.Resumo de bens 5.Voltar
                     \s""");
         //futuramente implantar demisao de empregado, venda de pasto, loja e vaca
     }
@@ -22,14 +22,14 @@ public class MenuPrincipal {
     public static void exibirMenuPasto() {
         System.out.println("""
                                 ***MENU PASTO***
-                    1.Produzir leite 2.Produzir derivados 3. Proximo dia
+                    1.Produzir leite 2.Produzir derivados 3. Proximo dia 4.Voltar
                     \s""");
     }
 
     public static void exibirMenuLoja() {
         System.out.println("""
                                 ***MENU LOJA***
-                    1.Vender derivados 2.ver lista de derivados 3.
+                    1.Vender derivados 2.Ver derivados produzidos 3.Voltar
                     \s""");
     }
 

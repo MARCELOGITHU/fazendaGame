@@ -29,16 +29,19 @@ public class Empregado extends Fazenda{
         return salarioPorMes;
     }
 
-    public void produzirDerivado(int i,Fazenda fazenda) {
+    public void produzirDerivado(int i,Fazenda fazenda,Loja loja) {
         Derivado derivado = fazenda.getListaDeDerivadosParaProducao().get(i);
-        fazenda.getListaDeDerivados().add(derivado);
+        loja.getListaDeDerivados().add(derivado);
         fazenda.retirarLeite(derivado.getLitrosDeLeiteParaProduzir());
         fazenda.retirarDoCaixa(derivado.getCustoParaFazer());
-        System.out.println(derivado.getNomeDoDerivado() + " produzido! Sua lista de derivados é:\n" + fazenda.getListaDeDerivados()  );
+        System.out.println(derivado.getNomeDoDerivado() + " produzido! Sua lista de derivados é:\n" + loja.getListaDeDerivados()  );
+        System.out.println("Seu caixa :" + fazenda.getCaixa() + "R$");
 
 //        CRIAR METODO QUE ADICIONA O DERIVADO A UMA LISTA NA LOJA OU FAZENDA(NAO SEI), DEPOIS ADICIONAR AO ESTOQUE DA LOJA
 
     }
+
+
     @Override
     public String toString() {
         return this.nome;

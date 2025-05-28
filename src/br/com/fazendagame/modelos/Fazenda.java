@@ -17,7 +17,7 @@ public class Fazenda {
     private ArrayList<Empregado> listaDeEmpregados = new ArrayList<>();
     private ArrayList<Loja> listaDeLoja = new ArrayList<>();
     private ArrayList<Pasto> listaDePasto = new ArrayList<>();
-    private ArrayList<Derivado> listaDeDerivados = new ArrayList<>();
+
     private List<Derivado> listaDeDerivadosParaProducao = List.of(
             new Derivado("leitecondensado", 50, 73, 40),
             new Derivado("cremedeleite", 38, 65, 32),
@@ -27,7 +27,6 @@ public class Fazenda {
             new Derivado("qualhada", 2, 10, 3));
     protected ArrayList<Vaca> listaDeVacas = new ArrayList<>();
     public ArrayList<Vaca> listaDeVacasQueDaoLeite = new ArrayList<>();
-    public ArrayList<Vaca> listaDeVacasQueNaoDaoLeite = new ArrayList<>();
 
 
     public Fazenda(String nomeDaFazenda) {
@@ -77,22 +76,18 @@ public class Fazenda {
         return listaDePasto;
     }
 
-    public List<Derivado> getListaDeDerivados() {
-        return listaDeDerivados;
-    }
-
     public List<Derivado> getListaDeDerivadosParaProducao() {
         return listaDeDerivadosParaProducao;
     }
 
     public void getListaDeDerivadosPossiveisDeProduzir() {
-            int i = 0;
-            for (Derivado derivado : listaDeDerivadosParaProducao) {
-                if (this.caixa >= derivado.getCustoParaFazer() & this.quantidadeDeLeitePorLitro >= derivado.getLitrosDeLeiteParaProduzir()) {
-                    System.out.println(i + "." + derivado + " / " + derivado.getLitrosDeLeiteParaProduzir() + "L / " + derivado.getLucroDeVenda() + "R$ / " + derivado.getCustoParaFazer() + "R$");
-                }
-                i++;
+        int i = 0;
+        for (Derivado derivado : listaDeDerivadosParaProducao) {
+            if (this.caixa >= derivado.getCustoParaFazer() & this.quantidadeDeLeitePorLitro >= derivado.getLitrosDeLeiteParaProduzir()) {
+                System.out.println(i + "." + derivado + " / " + derivado.getLitrosDeLeiteParaProduzir() + "L / " + derivado.getLucroDeVenda() + "R$ / " + derivado.getCustoParaFazer() + "R$");
             }
+            i++;
+        }
     }
 
     public boolean verificaListaDeDerivadosPossiveis() {
@@ -140,15 +135,12 @@ public class Fazenda {
         System.out.println("Pasto de " + refCustoDoPasto + " reais, com " + pasto.tamanho + " m² comprado, você tem " + this.caixa);
     }
 
-    public void comprarLoja(Loja loja, int tamanhoDoEstoque) {
+    public void comprarLoja(Loja loja) {
         this.listaDeLoja.add(loja);
         loja.identificacaoLoja = this.lojaIdentificacao;
         this.lojaIdentificacao++;
-        loja.tamanhoDoEstoque = tamanhoDoEstoque;
-        double refCustoDaLoja = tamanhoDoEstoque * loja.valorPorCadaEspacoNoEstoque;
-        this.retirarDoCaixa(refCustoDaLoja);
         loja.caixa = this.caixa;
-        System.out.println("loja de " + refCustoDaLoja + " reais, com " + loja.tamanhoDoEstoque + " espaços de estoque comprada, você tem " + this.caixa);
+        System.out.println("loja comprada, você tem " + this.caixa);
     }
 
     public void comprarVaca(Vaca vaca, Pasto pasto) {
@@ -162,10 +154,19 @@ public class Fazenda {
             this.vacaIdentificacao++;
             pasto.tamanho -= vaca.getEspacoNecessarioPorMetroQuadrado();
             System.out.println("Vaca " + vaca.getIdentificacaoVaca() + " custando: " + vaca.getValorDeCompra() + " comprada, você tem: "
-                    + this.listaDeVacas.toArray().length + " vacas e " + this.caixa + " reais, sua lista de vacas é: " + this.listaDeVacas);
+                    + this.listaDeVacas.toArray().length + " vacas e " + this.caixa + " reais, sua lista de vacas é: " + this.listaDeVacas.size() + " vacas");
         } else {
             System.out.println("O pasto não tem espaço suficiente para comprar esta vaca ");
         }
+    }
+
+    public void resumoBens(Loja loja) {
+        System.out.println(this.caixa + " reais\n" +
+                this.listaDeVacas.size() + " vacas\n" +
+                this.listaDeEmpregados.size() + " empregados\n" +
+                this.quantidadeDeLeitePorLitro + " litros de leite\n" +
+                "sua lista de derivados: " + loja.getListaDeDerivados());
+
     }
 
     public void proximoDia() {

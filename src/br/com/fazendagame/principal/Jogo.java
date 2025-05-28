@@ -20,11 +20,11 @@ public class Jogo {
         //COMPRA DE PASTO
         System.out.println("""
                               ***SOBRE O PASTO***
-                Hora de comprar pasto, o metro quadrado custa: 200.00,
+                O metro quadrado de terreno para o pasto custa: 200.00,
                 lembrando que uma vaca precisa pelo menos de 15m² para ser criada.
-                Digite a medida que será comprada:\s""");
-        int respostaTamanhoDoPasto = leitura.nextInt();
-        Pasto pasto = new Pasto(respostaTamanhoDoPasto, fazenda);
+                Você irá iniciar com 30m²:\s""");
+        int respostaTamanhoDoPasto;
+        Pasto pasto = new Pasto(30, fazenda);
         //COMPRA DE VACAS
         System.out.println("""
                              ***SOBRE AS VACAS***
@@ -49,7 +49,8 @@ public class Jogo {
         System.out.println("""
                               ***SOBRE LOJA***
                 Para ganhar dinheiro com o leite produzido você precisará de uma loja.
-                Uma loja com um estoque custa 500.00 reais, consiga esse dinheiro para comprar sua loja.\s""");
+                você irá iniciar sua loja.\s""");
+        fazenda.comprarLoja(loja);
         //ESPLICACAO DO METODO PROXIMODIA E SUAS CONSEQUENCIAS
         System.out.println("""
                               ***SOBRE OS DIAS***
@@ -84,19 +85,7 @@ public class Jogo {
                             respostaTamanhoDoPasto = leituraOpcaoMenuFazenda.nextInt();
                             pasto.aumentarTamanho(respostaTamanhoDoPasto, fazenda);
                         }
-                        case 3 -> {//opção comprar loja
-                            int respostaTamanhoDoEstoque;
-                            if (fazenda.getListaDeLoja().toArray().length < 1) {
-                                System.out.println("Digite quantos estoques para sua primeira loja, cada um custa: " + Loja.getValorPorCadaEspacoNoEstoque());
-                                respostaTamanhoDoEstoque = leituraOpcaoMenuFazenda.nextInt();
-                                fazenda.comprarLoja(loja, respostaTamanhoDoEstoque);
-                            } else {
-                                System.out.println("Digite quantos estoques quer comprar, cada um custa: " + Loja.getValorPorCadaEspacoNoEstoque());
-                                respostaTamanhoDoEstoque = leituraOpcaoMenuFazenda.nextInt();
-                                loja.aumentarEstoque(respostaTamanhoDoEstoque, fazenda);
-                            }
-                        }
-                        case 4 -> {//opcão comprar vaca
+                        case 3 -> {//opcão comprar vaca
                             System.out.println("Quantas vacas você quer comprar?");
                             int respostaQVacas;
                             respostaQVacas = leituraOpcaoMenuFazenda.nextInt();
@@ -110,6 +99,10 @@ public class Jogo {
                                 System.out.println("O preço por essas vacas é de: " + valorTotalVacas + " você tem: " + fazenda.getCaixa());
                             }
                         }
+                        case 4 -> {//opção resumo de bens
+                            fazenda.resumoBens(loja);
+                        }
+                        case 5 ->{}
                     }
                 }
                 case 2 -> {//exibe menu pasto
@@ -122,15 +115,17 @@ public class Jogo {
                             while (quantasVacasOrdenhar != fazenda.listaDeVacasQueDaoLeite.toArray().length) {
                                 System.out.println("De quantas vacas você quer ordenhar? você tem: " + fazenda.getListaDeVacas().toArray().length + " no total mas " + fazenda.listaDeVacasQueDaoLeite.toArray().length + " vacas dão leite");
                                 quantasVacasOrdenhar = leitura.nextInt();
-                                if (quantasVacasOrdenhar <= fazenda.listaDeVacasQueDaoLeite.toArray().length) {
+                                if (quantasVacasOrdenhar == 0){
+                                    break;
+                                }else if (quantasVacasOrdenhar <= fazenda.listaDeVacasQueDaoLeite.toArray().length) {
                                     for (int i = 0; i < quantasVacasOrdenhar; i++) {
                                         int ref = 0;
                                         if (fazenda.listaDeVacasQueDaoLeite.get(ref).getProducaoDeLeitePorDia() == 8) {
                                             fazenda.maoDeObra().ordenhar(fazenda.listaDeVacasQueDaoLeite.get(ref), fazenda);
                                         }
                                     }
-                                } else {
-                                    System.out.println("Você não tem tantas vacas que possam ser ordenhadas ordenhar");
+                                }else {
+                                    System.out.println("Você não tem tantas vacas que possam ser ordenhadas");
                                     quantasVacasOrdenhar = fazenda.listaDeVacasQueDaoLeite.toArray().length;
                                 }
                             }
@@ -142,24 +137,42 @@ public class Jogo {
                                 fazenda.getListaDeDerivadosPossiveisDeProduzir();
                                 int selecionarDerivado = 0;
                                 selecionarDerivado = leitura.nextInt();
-                                fazenda.maoDeObra().produzirDerivado(selecionarDerivado, fazenda);
+                                fazenda.maoDeObra().produzirDerivado(selecionarDerivado, fazenda, loja);
                             } else {
                                 fazenda.getListaDeDerivadosPossiveisDeProduzir();
                                 System.out.println("Não é possivel produzir");
                                 System.out.println("Seu saldo é de :" + fazenda.getCaixa() + "R$, e " + fazenda.getQuantidadeDeLeitePorLitro() + "L");
                             }
                         }
-                        case 3 ->{
+                        case 3 -> {
                             fazenda.proximoDia();
                         }
+
+                        case 4 ->{}
                     }
                 }
-                case 3->{//exibe menu loja
+                case 3 -> {//exibe menu loja
                     MenuPrincipal.exibirMenuLoja();
+                    opcaoGeral = leitura.nextInt();
+                    Scanner leituraOpcaoMenuPasto = new Scanner(System.in);
+                    switch (opcaoGeral) {
+                        case 1 -> {//Vender derivados
+                            if (!loja.getListaDeDerivados().isEmpty()){
+                                loja.venderDerivado(fazenda);
+                            }else {
+                                System.out.println("Sua lista de derivados esta vazia");
+                            }
+                        }
+                        case 2 -> {//ver lista de derivados
+                            loja.listaDeDerivadosResumido();
+                        }
+                        case 3 ->{}
+                    }
                 }
 
-                case 4-> {//proximo dia
+                case 4 -> {//proximo dia
                     fazenda.proximoDia();
+
                 }
             }
 
@@ -169,7 +182,6 @@ public class Jogo {
     }
 
 
-
-        //CRIAR PERGUNTAR SOBRE O QUE O USUARIO QUER FAZER
-        //SE ELE QUER ORDENHAR, IR PARA O PROXIMO DIA, CONTRATAR MAIS EMPREGADOS, COMPRAR VACAS OU PASTO, BASEADO NO CAIXA
+    //CRIAR PERGUNTAR SOBRE O QUE O USUARIO QUER FAZER
+    //SE ELE QUER ORDENHAR, IR PARA O PROXIMO DIA, CONTRATAR MAIS EMPREGADOS, COMPRAR VACAS OU PASTO, BASEADO NO CAIXA
 }

@@ -23,10 +23,15 @@ public class Pasto extends Fazenda {
     }
 
     public void aumentarTamanho(double tamanhoEmMetrosQuadrados,Fazenda fazenda) {
-        this.tamanho += tamanhoEmMetrosQuadrados;
-        fazenda.pastoIdentificacao ++;
-        double refCustoDoPasto = tamanhoEmMetrosQuadrados*valorDeTamanhoPorMetroQuadrado;
-        fazenda.retirarDoCaixa(refCustoDoPasto);
-        System.out.println(tamanhoEmMetrosQuadrados + " m² adicionado ao seu pasto, gasto de: " + refCustoDoPasto + " você tem: " + fazenda.getCaixa());
+        if (valorDeTamanhoPorMetroQuadrado <= fazenda.getCaixa()) {
+            this.tamanho += tamanhoEmMetrosQuadrados;
+            fazenda.pastoIdentificacao ++;
+            double refCustoDoPasto = tamanhoEmMetrosQuadrados*valorDeTamanhoPorMetroQuadrado;
+            fazenda.retirarDoCaixa(refCustoDoPasto);
+            System.out.println(tamanhoEmMetrosQuadrados + " m² adicionado ao seu pasto, gasto de: " + refCustoDoPasto + " você tem: " + fazenda.getCaixa());
+        }else {
+            System.out.println("Sem saldo suficiente, preço do m²: " + valorDeTamanhoPorMetroQuadrado + "R$");
+        }
+
     }
 }

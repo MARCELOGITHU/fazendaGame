@@ -4,6 +4,9 @@ import br.com.fazendagame.modelos.Fazenda;
 import br.com.fazendagame.modelos.produtoDerivadosDoLeite.Derivado;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Loja extends Fazenda {
     protected double caixa;
@@ -13,33 +16,36 @@ public class Loja extends Fazenda {
         return this.caixa;
     }
 
-    protected static double valorPorCadaEspacoNoEstoque = 500.00;
-    protected double valorPorCadaEspacoNoEstoque1 = 500.00;
-
     protected int tamanhoDoEstoque;
+    private ArrayList<Derivado> listaDeDerivados = new ArrayList<>(tamanhoDoEstoque);
 
     public void setCaixa(double caixa) {
         this.caixa = caixa;
     }
 
-//    public void venderDerivados(Fazenda fazenda) {
-//        double refValorDeDerivados = 0;
-//        for (int i = 0; i < fazenda.getListaDeDerivados().toArray().length; i++) {
-//            refValorDeDerivados += fazenda.getListaDeDerivados().get(i).getLucroDeVenda();
-//        }
-//        fazenda.getListaDeDerivados().clear();
-//        fazenda.adicionarAoCaixa(refValorDeDerivados);
-//        System.out.println(refValorDeDerivados + " Reais de derivados vendidos, seu caixa tem: " + fazenda.getCaixa());
-//    }
+    public void venderDerivado(Fazenda fazenda){
+        double refValorDeDerivados = 0;
+        for (int i = 0; i < this.getListaDeDerivados().toArray().length; i++) {
+            refValorDeDerivados += this.getListaDeDerivados().get(i).getLucroDeVenda();
+        }
+        this.getListaDeDerivados().clear();
+        fazenda.adicionarAoCaixa(refValorDeDerivados);
+        System.out.println(refValorDeDerivados + " Reais de derivados vendidos, seu caixa tem: " + fazenda.getCaixa());
+    }
+    public List<Derivado> getListaDeDerivados() {
+        return listaDeDerivados;
+    }
+    public void listaDeDerivadosResumido(){
+        Map<Derivado, Integer> contagem = new HashMap<>();
 
-    public static double getValorPorCadaEspacoNoEstoque() {
-        return valorPorCadaEspacoNoEstoque;
+        for (Derivado nome : this.listaDeDerivados) {
+            contagem.put(nome, contagem.getOrDefault(nome, 0) + 1);
+        }
+
+        for (Map.Entry<Derivado, Integer> entrada : contagem.entrySet()) {
+            System.out.println(entrada.getKey() + ": " + entrada.getValue());
+        }
+
     }
 
-    public void aumentarEstoque(int tamanhoDoEstoque,Fazenda fazenda) {
-        this.tamanhoDoEstoque += tamanhoDoEstoque;
-        fazenda.retirarDoCaixa(this.valorPorCadaEspacoNoEstoque1);
-        System.out.println("loja aumentada, para " + this.tamanhoDoEstoque +  " estoques, você tem " + fazenda.getCaixa());
-    }
-//CRIAR LOJA PARA VENDER O LEITE
 }
